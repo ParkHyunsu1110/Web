@@ -1,0 +1,35 @@
+﻿<html>
+	<head>
+		<title>
+			margin, padding 공부
+		</title>
+		<style>
+			div {
+				display: inline-block;
+				<!-- 전후 줄바꿈 없이 한줄에 다른 엘리먼트들과 나란히 배치, width & height, margin & padding 상하간격 지정 가능 -->
+				width: 200px;	<!-- 가로: 200픽셀 -->
+				height: 200px;	<!-- 세로: 200픽셀 -->
+			}
+			
+			.div_red {
+				background-color: red;	<!-- 바탕색: 빨강 -->
+				margin-right: 20px;		<!-- 오른쪽 바깥 부분 간격: 20픽셀 -->
+			}
+			
+			.div_blue {
+				background-color: blue;	<!-- 바탕색: 파랑 -->
+				padding-left: 20px;		<!-- 왼쪽 안쪽 부분 간격: 20픽셀 -->
+				padding-top: 20px;		<!-- 위쪽 안쪽 부분 간격: 20픽셀 -->
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div-red">
+			padding을 지정하지 않아 글자들이 완정히 붙었네요. 하지만 margin-right를 지정했으니까 오른쪽에 나올 태그는 간격을 주고 표시될꺼에요.
+		</div>
+		
+		<div class="div-blue">
+			padding-left와 padding-top을 지정했기 때문에 이 긓자들은 약간 띄고 표시되고 있어요.
+		</div>
+	</body>
+</html>

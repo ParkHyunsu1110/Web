@@ -1,0 +1,113 @@
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');?>
+<html>
+	<head>
+		<title>예제</title>
+	</head>
+	<body>
+		<form action="http://qkrgustn.com/ExInfo/process_add_data"method="post">
+			ID:<input type="text" name="id"><br/>
+			PW:<input type="text" name="pw"><br/>
+			Name:<input type="text" name="name"><br/>
+			Gender:<input type="enum" name="gender"><br/>
+			BirthDay:<input type="date" name="birthday"><br/>
+			
+			<button type="submit">입력</button>
+		</form>
+	</body>
+</html>
+
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');
+Class ExInfo_tools extends CI_Model{
+	public function set_by_ExInfo($id,$pw,$name,$gender,$birthday){
+		$info = array(
+			"id"=>$id,
+			"pw"=>$pw,
+			"name"=>$name,
+			"gender"=>$gender,
+			"birthday"=>$birthday
+		);
+		return $this->db->insert('sql_practice',$info);
+	}
+}
+?>
+
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');
+Class ExInfo extends CI_Controller{
+	public function exform(){
+		$this->load->view("exform");
+	}
+	public function process_add_data(){
+		$this->load->model("ExInfo_tools");
+		//$this->ExInfo_tools->set_by_ExInfo($_POST["id"],$_POST["pw"],$_POST["name"],$_POST["gender"],$_POST["birthday"]);
+		if($this->ExInfo_tools->set_by_ExInfo($_POST["id"],$_POST["pw"],$_POST["name"],$_POST["gender"],$_POST["birthday"]))
+			echo "성공";
+		else echo "실패";
+	}
+}
+?>
+
+			"name"=>$name,
+			"id"=>$id,
+			"pw"=>$pw,
+			"phone"=>$phone,
+			"address"=>$address,
+			"mail"=>$mail,
+			"gender"=>$gender,
+			"birthday"=>$birthday
+
+
+
+
+
+
+
+
+
+
+
+
+
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');?>
+<html>
+	<head>
+		<title>info</title>
+	</head>
+	<body>
+		<form action="http://qkrgustn.com/check/process_post_data"method="post">	<!--도메인/파일명/함수명, post형식-->
+			ID : <input type="text" name="id"><br/>
+			
+			<button type="submit">조회</button>
+		</form>
+	</body>
+</html>
+
+
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');
+Class Check extends CI_Controller{
+	public function cform(){
+		$this->load->view("cform");
+	}
+	public function process_post_data(){
+		$this->load->model("check_tools");	//model의 check_tools을 불러옴
+		
+		$result=$this->check_tools->get_by_Check( $_POST["id"]); //$결과 = post형식으로 받아온 인자를 check_tools의 get_by_Check로 넘김
+		
+		foreach($result->result_array() as $row){
+			echo $row['name']."<br>";
+		}
+	}
+}
+?>
+
+<? if(! defined('BASEPATH')) exit('Nodirect script access allowed');
+Class Check_tools extends CI_Model{
+	public function get_by_Check( $post_value){
+		$this->db->select("name");
+		
+		$this->db->where("id",$post_value);
+		
+		return $this->db->get("membership");
+		//select name from membership where id=$post_value;
+	}
+}
+?>

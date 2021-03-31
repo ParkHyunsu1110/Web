@@ -1,0 +1,24 @@
+이름 입력 후 포획 클릭 시 '년-월-일 시:분:초 에 "name"을 획득하였다!' 나오게 함 insert 시 나오게 하면 될듯 회원가입 응용하기
+			↓ 같은 일시 => 시간도 DB에 저장해야 함
+이름 입력 후 소환 클릭 시 '년-월-일 시:분:초 에 포획했던 "name"을(를) 소환했다!'	아이디 검색했던걸로 응용하기
+	DB에 없는 폭행몬 소환 시 '"name"은(는) 포획한 적이 없다!'		아이디 없으면 없습니다 나오게 한거
+
+
+public function pochangmon_capture ($name){
+	$pochangmon_capture = array (
+		"name"=>$name
+	);
+	return $this->db->insert('pochangmon',$pochangmon_capture);
+}
+
+	public function pochangmon_capture($name){
+		$pochangmon_capture = array(
+			"name"=>$name
+		);
+		return $this->db->insert('pochangmon',$pochangmon_capture);
+	}
+public function pochangmon_call(){
+	$this->db->select("name");
+	$this->db->where("name",$_POST["name"]);	
+	$result = $this->db->get("pochangmon");
+}

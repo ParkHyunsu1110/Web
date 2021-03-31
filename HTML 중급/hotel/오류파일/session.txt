@@ -1,0 +1,71 @@
+일단은 대략 정리해 보았는데,
+'세션'은 서버마다 가지고있는 인증정보이다.
+세션이 생성되지 않으면 각각의 동작마다 확인을 해야 한다.
+한번 세션을 지정하면 어디서나 세션을 불러와서 사용가능하다.
+-
+세션 기능을 불러와서
+=> $this->load->library("session");
+
+세션 변수를 하나 생성
+=> $this->session->set_userdata("my_session","이름");
+
+$_SESSION["my_session"]; 을 사용해 변수로 불러와서 사용가능
+ㄴ> echo $_SESSION["my_session"]; 을 사용하면 "이름" 이 나타남.
+
+-isset : 어떤 변수가 있는지 없는지 검사하는 php 함수
+
+설정된 세션 값이 있는지 없는지 검사.
+isset($_SESSION["my_session"]);
+설정값이 있을경우 true를 리턴, 없을경우 false 리턴 함.
+
+
+<!--의문 : isset도 num_rows() 처럼 갯수로 사용하는건지...?,
+그럼 이렇게 사용하는게 맞는것인지 궁금합니다!-->
+ㄴ> 갯수로 사용하는게 아니라 정말 있는지 없는지만 검색하는것이기 때문에 
+if( isset($_SESSION["my_session"])) return false; 로 사용해야 한다.
+
+세션 값이 없으면
+if( isset($_SESSION["my_session"]) == 0) return false;
+
+세션 값이 있으면
+else return true;
+이런식으로....
+
+
+session 예제
+class Test extends CI_Controller {
+
+public function session_register()
+{
+$this->load->library( "session" );
+
+$this->session->set_userdata( "login_id", "남민석" );
+}
+
+public function market()
+{
+if ( isset( $_SESSION["login_id"] ) ){
+echo $_SESSION["login_id"]."님 환영합니다!";
+}
+else {
+echo "로그인하지 않은 사용자이므로 마켓을 이용할 수 없습니다!";
+}
+}
+}
+
+
+<? if( ! defined('BASEPATH') ) exit ('No direct script access allowed');
+Class Session_test extends CI_Controller{
+	public function session_storage(){
+		$this->session->set_userdata("login_whether","구구구가가가가각");	
+	}
+	public function login_check(){
+		if(isset($_SESSION["login_whether"])){
+			echo $_SESSION["login_whether"]."님 반갑습니다.";
+		}
+		else{
+			echo "다시 로그인 해주시기 바랍니다.";
+		}
+	}
+}
+?>

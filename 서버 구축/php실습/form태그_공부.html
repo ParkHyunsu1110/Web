@@ -1,0 +1,28 @@
+﻿<html>
+	<head>
+		<title>
+			form 태그 공부 form.html
+		</title>
+	</head>
+	<body>
+		<input type="text" name="string">
+		<select name="number">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		<input type="radio" name="my_radio" value="male">남자
+		<input type="radio" name="my_radio" value="female">여자
+		
+		<input type="checkbox" name="my_check" value="basketball">농구
+		<input type="checkbox" name="my_check" value="soccer">축구
+		<input type="checkbox" name="my_check" value="baseball">야구
+		
+		<form action="receive.php" method="post">
+			<input type="text" name="first_text">
+			<input type="text" name="second_text">
+			
+			<button>전송</button>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,80 @@
+세션
+세션이란?
+- 서버가 가지고 있는 인증 정보라고 할 수 있음.
+예시) 한번 로그인하면 어떤 작업을 하더라도 로그인 정보가 유지되어 다시 로그인 하지 않아도 정상적으로 사이트 이용이 가능.
+	-> 최초 로그인 시점에 서버가 세션을 생성하기 때문.
+	=> 만일 최초 로그인 시에 세션을 형성하지 않으면, 어떤 활동을 하더라도 계속해서 권한이 있는지 검사해야 함.
+	=> 코드가 복잡해지고, 실용성 떨어짐.
+---------------------------------------------------------
+세션 사용 시 codeigniter에서 세션 기능 불러와야 함.
+=(소스 코드)=> $this->load->library("session"); 
+-> config/autoload.php의 libraries에 session 기입 
+=>  $this->load->library("session"); 매번 작성할 필요 없음.
+	ㄴ> $autoload['libraries'] = array("database","session");
+
+세션 등록하는 코드
+=(소스 코드)=> $this->session->set_userdata("my_session", "이름");  -> controllers/hotel/ line:79
+
+$_SESSION["my_session"]이라는 변수로 세션 정보 사용 가능
+	
+$this->session->set_userdata( "my_session", "이름" );
+ 
+echo $_SESSION["my_session"];
+위의 코드에서는 "이름" 이라고 나타남.
+
+변수가 있는지 검사하는 php함수 : isset
+if(isset($_SESSION["my_session"])){
+	echo $_SESSION["my_session"];
+} else echo "로그인 하고 와!";
+---------------------------------------------------------
+세션을 없애는 방법
+unset( $_SESSION["my_session"]); ->인자로 들어온 특정 변수를 "애당초 선언하지 않았던 것 처럼" 없애버리는 함수.
+----------------------------------------------------------
+	
+//Controller
+ public function login()
+ { 
+  $this->load->library( "session" );
+  $this->load->model( "model_tools" );
+  $result = $this->model_tools->login_check( $_POST["ID"], $_POST["PW"] );
+  
+  if( $result->num_rows() != 1 ) echo "로그인 실패입니다.";
+  else {
+   $this->session->set_userdata( "ID", $_POST["ID"] );
+   echo "로그인 성공입니다.";
+  }
+  
+  }
+ 
+ //Model_tools
+ public function login_check( $ID, $PW )
+ {
+  $this->db->where( "ID", $ID );
+  $this->db->where( "PW", $PW );
+  
+  $result = $this->db->get( DB이름 );
+  
+  return $result;
+ }
+
+# num_rows : 데이터의 개수를 return 해주는 함수.
+--------------------------------------
+1.
+if( $result ) echo "로그인 실패입니다.";
+else {
+ $this->session->set_userdata( "ID", $_POST["ID"] );
+ echo "로그인 성공입니다.";
+}
+
+	
+2.
+if( $result->num_rows() != 1 ) echo "로그인 실패입니다.";
+else {
+ $this->session->set_userdata( "ID", $_POST["ID"] );
+ echo "로그인 성공입니다.";
+}
+
+1번은 안됨 => $result가 아무런 데이터가 없어도 null값이 할당되는게 아니라 빈 검색결과 행이 할당되기 때문.
+
+만일 $result에 빈 행이 들어오면 $result->num_rows()를 했을때 0이 나오게 됨.
+-----------------------------------------

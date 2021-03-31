@@ -1,0 +1,49 @@
+1. 컨트롤러에서 모델의 포캣몬캡처 함수를 호출할때 몇개의 인자를 전달하는지? 그리고 그렇게 생각한 근거는?
+
+현재 서버에 올라간 컨트롤러 기준으로 호출할때 $_POST["msg"]를 전달합니다.
+
+모델의 경우 컨트롤러의 폼으로 부터 전달된 데이터를 메소드로 전달하니깐 데이터인 $_POST["msg"]가 넘어갈것 같습니다.
+
+if($this->pochangmon_tools->pochangmon_capture($_POST["msg"]))의 $_POST["msg"] --- controllers/Pochangmon_Go/8번 라인
+------------------------------------
+2. 모델의 포켓몬캡처 함수는 인자를 몇개 받기로 정의되어 있는지? 그리고 그렇게 생각한 근거는?
+
+현재 서버에 올라간 모델 기준으로 캡처함수가 $name, $date로 정의된 인자 2개를 받기로 되어있습니다.
+
+public function pochangmon_capture($name, $date)에서 $name, $date --- models/Pochangmon_tools 3번 라인
+------------------------------------
+실제로 지금 form 이 컨트롤러로 어떤 포스트값들을 전달하는지? 그리고 그렇게 생각한 근거는? 상세히 써주세요
+
+현재 views/pochangmon_Go/12번 라인에서 전달되는 msg : ~ 부분을 전달하고 있음.
+
+컨트롤러는 웹브라우저에서 주소를 입력해서 인수를 전달받기 때문.
+
+public function pochangmon_capture($name, $date){
+		$pochangmon_capture = array(
+			"name"=>$name,
+			"date"=>$date
+		);		
+		$this->db->select("name");		
+		$this->db->where("name",$_POST["msg"]);		
+		$result = $this->db->get("pochangmon");		
+		if ( $result->num_rows() == 0 ) return $this->db->insert('pochangmon',$pochangmon_capture);
+		else return false;
+	}
+
+public function pochangmon_capture(){
+		$this->load->model("pochangmon_tools");
+		if($this->pochangmon_tools->pochangmon_capture($_POST["msg"], $_POST["date"])){
+			echo " ".date('Y-m-d H:i:s')." 에 ".$_POST["msg"]." 을(를) 획득하였다!";
+		}
+		else echo " ".$_POST["msg"]." 은(는) 이미 포획했다!";
+	}
+public function pochangmon_capture(){
+		$this->load->model("pochangmon_tools");
+		
+		$date = date( "Y-m-d H:i:s" );
+		
+		if($this->pochangmon_tools->pochangmon_capture($_POST["msg"], $date)){
+			echo " ".date('Y-m-d H:i:s')." 에 ".$_POST["msg"]." 을(를) 획득하였다!";
+		}
+		else echo " ".$_POST["msg"]." 은(는) 이미 포획했다!";
+	}

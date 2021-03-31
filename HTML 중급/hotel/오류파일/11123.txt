@@ -1,0 +1,14 @@
+public function logout(){
+		unset( $_SESSION["login_check"] );
+
+		echo "<script> alert('로그아웃 되었습니다.'); document.location.href='http://qkrgustn.com/hotel/hotel_main';</script>";
+	}
+
+function logout(){
+	document.location.href = "http://qkrgustn.com/hotel/logout";
+}
+
+<?
+	if ( isset( $_SESSION["login_check"] ) ) echo $_SESSION["login_check"]."님 반갑습니다. &nbsp&nbsp <span onclick='logout();'>로그아웃</span>";
+	else echo "<span onclick=\"menu_go('login');\">로그인</span>";
+?>

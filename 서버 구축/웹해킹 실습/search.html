@@ -1,0 +1,273 @@
+﻿<html>
+	<body>
+		<form id="nx_search_form" name="search" action="?" method="get" role="search" onsubmit="return nx_form_submit(this)">
+			<fieldset class="greenwindow">
+			<legend>검색</legend>
+			<input type="hidden" name="sm" value="tab_hty.top">
+			<input type="hidden" name="where" value="nexearch">
+			<div class="greenbox"> 
+				<span class="keyword">
+					<input type="text" id="nx_query" name="query" class="box_window" maxlength="255" accesskey="s" value="" autocomplete="off" title="검색어 입력">
+				</span>
+			</div>
+			<input type="hidden" name="oquery" value="">
+			<input type="hidden" name="tqi" value="Uksktlprvh8ssvxELL4ssssstpC-287927">
+			<input type="hidden" value="" name="acq" disabled="">
+			<input type="hidden" value="" name="acr" disabled="">
+			<input type="hidden" value="" name="qdt" disabled="">
+			<input type="hidden" value="" name="acir" disabled="">
+			<input type="hidden" value="" name="os" disabled="">
+			<input type="hidden" value="" name="bid" disabled="">
+			<input type="hidden" value="" name="pkid" disabled="">
+			<input type="hidden" value="" name="eid" disabled="">
+			<input type="hidden" value="" name="mra" disabled=""> 
+			
+			<div class="setkr_area">
+				<!-- [D] 레이어 상태에 따라 title값 변화 필요 * 닫힌 경우 : title="한글 입력기 열기" * 열린 경우 : title="한글 입력기 닫기" -->
+				<button id="ke_kbd_btn" type="button" class="bt_setkr" title="한글 입력기 열기" onclick="nx_ime_load(this);return tCR('a=sch.ime');">
+					<span class="spnew ico_keyboard">한글 입력기</span>
+				</button>
+				<style type="text/css" id="_nx_kbd_style"></style>
+				<div id="_nx_kbd" style="display:none;"></div>
+			</div> 
+			<!--@code lang="html" title="[JS] 한글입력기 레이지 로딩 하거나 열기/닫기 수행."-->
+			<script type="text/javascript">
+				function nx_ime_load_fail ()
+				{ alert("네트워크 상태가 안 좋아 한영입력기를 불러오지 못했습니다.\n잠시 후 다시 시도해 주세요."); }
+				function nx_ime_load (elBtn) { if (window.nx_kbd_toggle) { nx_kbd_toggle(elBtn); return; }
+				new $Ajax("https://ssl.pstatic.net/sstatic/au/pc/ime/ime.contents_170920.js",
+				{ type : "jsonp", timeout : 3, callbackid : "$get_ime", onload : function (res) { var oData = res.json(); if (oData) { var elStyle = $("_nx_kbd_style");
+				oData.ime_css += "#_nx_kbd .setkorhelp a { display:none; }" ;
+				if (elStyle.styleSheet) { elStyle.styleSheet.cssText = oData.ime_css; } else { elStyle.innerHTML = oData.ime_css; } $("_nx_kbd").innerHTML = oData.ime_html;
+				nx_js_lazyload("https://ssl.pstatic.net/sstatic/au/s/pc/_common/ime/nhn.ime_search_140825.js", function () { nx_kbd_toggle(elBtn); }); } else { nx_ime_load_fail(); } },
+				ontimeout : nx_ime_load_fail, onerror : nx_ime_load_fail }).request(); }
+			</script>
+			<div id="nautocomplete" class="autocomplete">
+				<a href="#" class="bt_atcp _btn_arw fold" onclick="return false;">
+					<span class="blind _text">자동완성 펼치기</span>
+					<span class="ico_arrow spnew"></span>
+				</a>
+			</div>
+			<button type="submit" class="bt_search" onmouseover="$Element(this).addClass('over');" onmouseout="$Element(this).removeClass('over down');" onmousedown="$Element(this).removeClass('over');$Element(this).addClass('down');">
+				<span class="spnew ico_search">검색</span>
+			</button>
+			<div class="ly_atcmp" id="nx_autoframe_top" style="display:none;">
+				<iframe frameborder="0" title="빈프레임" style="display:none;display:block\9;display:block\0/;position:absolute;top:-1px;left:-1px;z-index:-1;width:100%;height:100%;padding:1px;filter:alpha(opacity=0);opacity:0">
+			</iframe>
+				<div class="api_atcmp_wrap _atcmp" style="display:none;">
+					<div class="words _words">
+						<div class="_atcmp_result_wrap">
+							<ul class="_resultBox"></ul>
+							<ul class="_resultBox"></ul>
+							<ul class="_resultBox"></ul>
+							<ul class="_resultBox"></ul>
+						</div>
+						<div class="add_group _atcmp_answer_wrap"></div>
+					</div>
+					<div class="atcmp_plus _plus">
+						<span class="desc">
+							<span class="plus_txt">시간대와 관심사에 맞춘 <em class="txt">컨텍스트 자동완성</em></span>
+							<a onclick="__atcmpCR(event, this, 'plus.help', '','','');" href="https://help.naver.com/support/alias/search/word/word_16.naver" target="_blank" class="spat ico_info">
+								<span class="blind">도움말 보기</span>
+							</a>
+						</span> 
+						<span class="switch _plus_btn">
+							<a href="#" class="btn_turnon" onclick="__atcmpCR(event, this, 'plus.use', '','','');">ON<span class="blind">선택됨</span></a>
+							<a href="#" class="btn_turnoff active" onclick="__atcmpCR(event, this, 'plus.unuse', '','','');">OFF</a>	
+						</span>
+						<div class="layer_plus _plusAlert" style="display: none;"> 
+							<strong class="tit">컨텍스트 자동완성</strong>
+							<div class="_logout" style="display:block;">
+								<p class="dsc"><em class="txt">동일한 시간대/연령/남녀별</em> 사용자 그룹의<br>관심사에 맞춰 자동완성을 제공합니다.</p>
+								<div class="btn_area">
+									<a onclick="__atcmpCR(event, this, 'plus.login', '','','');" href="https://nid.naver.com/nidlogin.login?url=https%3A%2F%2Fsearch.naver.com%2Fsearch.naver%3Fsm%3Dtab_hty.top%26where%3Dnexearch%26query%3D%26oquery%3D%25EC%25A7%2584%25EC%25A7%259C%2B%25EB%2590%25A0%25EA%25B9%258C%253F%26tqi%3DUkskswprvTosseNsg8Vssssssxl-166471" class="btn btn_login">로그인</a>
+									<a onclick="__atcmpCR(event, this, 'plus.detail', '','','');" href="https://help.naver.com/support/alias/search/word/word_16.naver" target="_blank" class="btn btn_view">자세히</a>
+								</div>
+							</div>
+							<div class="_login" style="display:none;">
+								<p class="dsc">ON/OFF설정은<br>해당 기기(브라우저)에 저장됩니다.</p> 
+								<div class="btn_area">
+									<a onclick="__atcmpCR(event, this, 'plus.detail', '','','');" href="https://help.naver.com/support/alias/search/word/word_21.naver" target="_blank" class="btn btn_view">자세히</a>
+								</div>
+							</div>
+							<button type="button" class="btn_close _close" onclick="__atcmpCR(event, this, 'plus.close', '','','');">
+								<i class="spat ico_close">컨텍스트 자동완성 레이어 닫기</i>
+							</button>
+						</div>
+					</div>
+					<p class="func _atcmpBtnGroup">
+						<span class="fl">
+							<a class="_help" onclick="__atcmpCR(event, this, 'help', '','','');" href="https://help.naver.com/support/alias/search/word/word_17.naver" target="_blank">도움말</a>
+							<span class="atcmp_bar"></span>
+							<a onclick="__atcmpCR(event, this, 'report', '','','');" href="https://help.naver.com/support/alias/search/word/word_18.naver" target="_blank" class="report">신고</a>
+						</span>
+						<span>
+							<em>
+								<a class="hisoff" href="javascript:;">검색어저장 켜기</a>
+								<span class="atcmp_bar"></span>
+							</em>
+							<a class="funoff" href="javascript:;">자동완성 끄기</a>
+						</span>
+					</p>
+					<span class="atcmp_helper _help_tooltip1" style="display: none;">기능을 다시 켤 때는 <em class="ico_search spat">검색창 오른쪽 화살표 버튼</em>을 클릭하세요</span>
+					</div>
+					<div class="api_atcmp_wrap _atcmpIng" style="display:none;">
+						<div class="words">
+						<p class="info_words">현재 자동완성 기능을 사용하고 계십니다.</p>
+					</div>
+					<p class="func _atcmpBtnGroup">
+						<span class="fl">
+							<a class="_help" onclick="__atcmpCR(event, this, 'help', '','','');" href="https://help.naver.com/support/alias/search/word/word_17.naver" target="_blank">도움말</a>
+							<span class="atcmp_bar"></span>
+							<a onclick="__atcmpCR(event, this, 'report', '','','');" href="https://help.naver.com/support/alias/search/word/word_18.naver" target="_blank" class="report">신고</a>
+						</span>
+						<span>
+							<em>
+								<a class="hisoff" href="javascript:;">검색어저장 켜기</a>
+								<span class="atcmp_bar"></span>
+							</em>
+							<a class="funoff" href="javascript:;">자동완성 끄기</a>
+						</span>
+					</p>
+					<span class="atcmp_helper _help_tooltip2" style="display: none;">기능을 다시 켤 때는 <em class="ico_search spat">검색창 오른쪽 화살표 버튼</em>을 클릭하세요</span>
+				</div>
+				<div class="api_atcmp_wrap _atcmpStart" style="display:none;">
+					<div class="words">
+						<p class="info_words">자동완성 기능이 활성화되었습니다.</p>
+					</div>
+					<p class="func _atcmpBtnGroup">
+						<span class="fl">
+							<a class="_help" onclick="__atcmpCR(event, this, 'help', '','','');" href="https://help.naver.com/support/alias/search/word/word_17.naver" target="_blank">도움말</a>
+							<span class="atcmp_bar"></span>
+							<a onclick="__atcmpCR(event, this, 'report', '','','');" href="https://help.naver.com/support/alias/search/word/word_18.naver" target="_blank" class="report">신고</a>
+						</span>
+						<span>
+							<em>
+								<a class="hisoff" href="javascript:;">검색어저장 켜기</a>
+								<span class="atcmp_bar"></span>
+							</em>
+							<a class="funoff" href="javascript:;">자동완성 끄기</a>
+						</span>
+					</p>
+					<span class="atcmp_helper _help_tooltip3" style="display: none;">기능을 다시 켤 때는 <em class="ico_search spat">검색창 오른쪽 화살표 버튼</em>을 클릭하세요</span>
+				</div>
+				<div class="api_atcmp_wrap _atcmpOff" style="display:none;">
+					<div class="words">
+						<p class="info_words">자동완성 기능이 꺼져 있습니다.</p>
+					</div>
+					<p class="func _atcmpBtnGroup">
+						<span class="fl"><a class="_help" onclick="__atcmpCR(event, this, 'help', '','','');" href="https://help.naver.com/support/alias/search/word/word_17.naver" target="_blank">도움말</a>
+						<span class="atcmp_bar"></span>
+						<a onclick="__atcmpCR(event, this, 'report', '','','');" href="https://help.naver.com/support/alias/search/word/word_18.naver" target="_blank" class="report">신고</a>
+						</span>
+						<span>
+							<em>
+								<a class="hisoff" href="javascript:;">검색어저장 켜기</a><span class="atcmp_bar"></span>
+							</em>
+							<a class="funoff" href="javascript:;">자동완성 켜기</a>
+						</span>
+					</p>
+				</div> 
+				<div class="api_atcmp_wrap _keywords" style="display:none;">
+					<div class="my_words">
+						<div class="lst_tab">
+							<ul>
+								<li class="on _recentTab">
+									<a href="javascript:;">최근검색어</a>
+								</li> 
+								<li class="_myTab">
+									<a href="javascript:;">내 검색어</a>
+								</li>
+							</ul> 
+						</div>
+						<div class="words _recent">
+							<ul>
+								<li data-rank="@rank@">
+									<a class="t@my@ _star _myBtn" title="내 검색어 등록" href="javascript:;">
+										<em class="spat">내 검색어 등록</em>
+									</a>
+									<a href="javascript:;" class="keyword">@txt@</a>
+									<em class="keyword_date">@date@.</em>
+									<a href="javascript:;" class="btn_delete spat _del" title="검색어삭제">삭제</a>
+									<span style="display:none">@in_txt@</span>
+								</li>
+							</ul> 
+							<div class="info_words _recentNone" style="display:none">최근검색어 내역이 없습니다.</div>
+							<p class="info_words _offMsg" style="display:none">검색어 저장 기능이 꺼져 있습니다.</p>
+						</div>
+						<div class="words _my" style="display:none">
+							<ul>
+								<li data-rank="@rank@">
+									<a class="ton _star _myBtn" title="내 검색어 해제" href="javascript:;">
+										<em class="spat">내 검색어 해제</em>
+									</a>
+									<a href="javascript:;" class="keyword">@txt@</a>
+								</li>
+							</ul>
+							<div class="info_words _myNone" style="display:none">
+								설정된 내 검색어가 없습니다.<br>
+								최근검색어에서 <span class="star spat">내 검색어 등록</span>를 선택하여 자주 찾는 검색어를<br>
+								내 검색어로 저장해 보세요.
+							</div>
+							<p class="info_words _offMsg" style="display:none">검색어 저장 기능이 꺼져 있습니다.</p>
+						</div>
+						<p class="noti _noti" style="display:none">
+							<em class="ico_noti spat">
+								<span class="blind">알림</span>
+							</em>공용 PC에서는 개인정보 보호를 위하여 반드시 로그아웃을 해 주세요.
+						</p>
+						<p class="func _recentBtnGroup">
+							<span class="fl">
+								<a class="_delMode" href="javascript:;">기록 삭제</a>
+							</span>
+							<span>
+								<a class="_keywordOff" href="javascript:;">검색어저장 끄기</a>
+									<span class="atcmp_bar"></span>
+									<a class="_acOff" href="javascript:;">자동완성 끄기</a>
+							</span>
+						</p>
+						<p class="func _recentDelBtnGroup" style="display:none">
+							<span class="fl">
+								<a class="_delAll" href="javascript:;" title="최근 검색어 기록을 모두 삭제합니다.">기록 전체 삭제</a>
+							</span>
+							<span>
+								<a class="_delDone" href="javascript:;">완료</a>
+							</span>
+						</p>
+						<p class="func _myBtnGroup" style="display:none">
+							<span class="fl">
+								<a class="_delAll" href="javascript:;" title="설정된 내 검색어를 모두 삭제합니다.">기록 전체 삭제</a>
+							</span>
+							<span>
+								<a class="_keywordOff" href="javascript:;">검색어저장 끄기</a>
+								<span class="atcmp_bar"></span>
+								<a class="_acOff" href="javascript:;">자동완성 끄기</a>
+							</span>
+						</p>
+						<span class="atcmp_helper _help2">기능을 다시 켤 때는 <em class="ico_search spat">검색창 오른쪽 화살표 버튼</em>을 클릭하세요</span>
+						<div class="ly_noti _maxLayer" style="display:none">
+							<span class="mask"></span>
+							<p>
+								<span class="ico_alert spat"></span>내 검색어는 <em>최대 10</em>개 까지 저장할 수 있습니다.<br>
+								추가하시려면 기존 내 검색어를 지워주세요. 
+								<a href="javascript:;" class="btn_close _close">
+									<i class="spat ico_close">닫기</i>
+								</a>
+							</p> 
+						</div>
+					</div>
+				</div> 
+				<div class="api_atcmp_wrap _alert" style="display:none;">
+					<div class="api_atcmp_alert">
+						<span class="ico_alert spat"></span>
+						<p class="dsc_txt">
+							<em class="_passage"></em><br>
+							<a class="_link" target="_blank" href="" onclick="return goOtherCR(this,'a=sug.vote&amp;r=&amp;i=&amp;u='+urlencode(this.href));">자세히보기</a>
+							</p> 
+						</div> 
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</body>
+</html>

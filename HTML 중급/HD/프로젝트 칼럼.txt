@@ -1,0 +1,8 @@
+ÀÌ¸§
+id
+pw
+tel
+address
+email
+gender
+birth

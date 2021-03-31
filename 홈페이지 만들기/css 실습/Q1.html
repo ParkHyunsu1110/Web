@@ -1,0 +1,107 @@
+﻿<html>
+	<head>
+		<title>
+			달력 제작
+		</title>
+	</head>
+	
+	<style>
+		.month{
+			color:green;
+			font-size:3em;
+			text-align:center;
+		}
+		.sun {
+			color:red;
+		}
+		
+		.sat {
+			color:blue;
+		}
+		.publicholiday{
+			color : red;
+			text-decoration:none;
+		}
+	</style>
+	
+	<body>
+		<script>
+			function message(a){
+				alert(a);
+			}
+		</script>
+		<p class = "month">2019년 6월</p>
+		<table cellpadding = 0 cellspacing = 30 width = 100% style = "text-align:center;">
+			<tr>
+				<td class="sun">日</td>
+				<td>月</td>
+				<td>火</td>
+				<td>水</td>
+				<td>木</td>
+				<td>金</td>
+				<td class="sat">土</td>
+			</tr>
+			<tr>
+			<!--1주-->
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="sat">1</td>
+			</tr>
+			<tr>
+			<!--2주-->
+				<td class="sun">2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td><a href="javascript:message('신나는 휴일! 집에서 쉬기')" class=" publicholiday">6</a></td>
+				<td>7</td>
+				<td class="sat">8</td>
+			</tr>
+			<tr>
+			<!--3주-->
+				<td class="sun">9</td>
+				<td>10</td>
+				<td>11</td>
+				<td>12</td>
+				<td>13</td>
+				<td>14</td>
+				<td class="sat">15</td>
+			</tr>
+			<tr>
+			<!--4주-->
+				<td class="sun">16</td>
+				<td>17</td>
+				<td>18</td>
+				<td>19</td>
+				<td>20</td>
+				<td>21</td>
+				<td class="sat">22</td>
+			</tr>
+			<tr>
+			<!--5주-->
+				<td class="sun">23</td>
+				<td>24</td>
+				<td>25</td>
+				<td>26</td>
+				<td>27</td>
+				<td>28</td>
+				<td class="sat">29</td>
+			</tr>
+			<tr>
+			<!--6주-->
+				<td class="sun">30</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		
+	<body>
+</html>

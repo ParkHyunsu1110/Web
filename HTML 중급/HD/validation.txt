@@ -1,0 +1,67 @@
+$this->load->library("form_validation");
+$this->form_validation->set_rules("id","아이디","required");
+$this->form_validation->set_rules("pw","비밀번호","required|min_length[6]");
+
+$this->load->library("form_validation");
+$this->form_validation->set_rules("name","이름","required|max_length[5]|min_length[2]");
+$this->form_validation->set_rules("tel","전화번호","numeric|required");
+$this->form_validation->set_rules("id","아이디","required");
+$this->form_validation->set_rules("pw","비밀번호","required|min_length[6]");
+$this->form_validation->set_rules("gender","성별","required|in_list[남,여]");
+
+function join(){
+				var my_info = document.getElementById("id");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("pw");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("name");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("tel");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}var my_info = document.getElementById("email");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("address");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("gender");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				var my_info = document.getElementById("birthday");
+				if( !my_info.checkValidity() ){
+					my_info.reportValidity();
+					return false;
+				}
+				$.post(
+					"http://qkrgustn.com/hd/join_add_data",
+					{id:document.getElementById("id").value,
+					pw:document.getElementById("pw").value,
+					name:document.getElementById("name").value
+					tel:document.getElementById("tel").value,
+					email:document.getElementById("email").value,
+					address:document.getElementById("address").value,
+					gender:document.getElementById("gender").value,
+					birth:document.getElementById("birthday").value},
+					function(data){
+						alert('회원가입 완료');
+						alert( data );
+					}
+				);
+		}

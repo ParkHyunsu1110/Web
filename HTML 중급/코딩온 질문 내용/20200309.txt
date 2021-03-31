@@ -1,0 +1,33 @@
+처음 건드릴때 모델 부분에서는 name, date 이렇게 인자 2개를 받도록 해둬서,
+컨트롤러에서도 호출시에 인자 두개 전달하도록 했습니다.
+안되면 둘다 인자를 빼보기도 했구요...
+
+제가 이부분을  잘 모르고 어려워하는것 같습니다...
+컨트롤러에서 $_POST["date"]로 전달해주도록 했는데,
+이 $_POST["date"]가 맞는지를 모르겠습니다....
+$_POST["date"]에서만 오류가 났습니다. => 인자ㅇ와 관련이 없음,,,, 그냥 데이터임....
+정의되지 않은 인덱스라고 하면서요.
+그래서 문제는 $_POST["date"]인것 같은데.... 저 부분을 어찌해야될지를 모르겠습니다..
+
+-----오류 내용입니다.------
+A PHP Error was encountered
+Severity: Notice
+
+Message: Undefined index: date
+
+Filename: controllers/Pochangmon_Go.php
+
+Line Number: 8 => 입력한 위치와 누르는 버튼에 따라서 8, 15,16으로 바뀜
+
+Backtrace:
+
+File: /var/www/application/controllers/Pochangmon_Go.php
+Line: 8
+Function: _error_handler
+
+File: /var/www/html/index.php
+Line: 315
+Function: require_once
+-------------------------------
+
+

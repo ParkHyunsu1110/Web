@@ -1,0 +1,21 @@
+컨트롤러 17번 라인의 $_POST["date"] 가 어떤 코드인지 이걸 왜 쓰신건지만 좀 설명 부탁드려용
+
+저의 의도는
+컨트롤러의 포켓몬 캡쳐함수에서 모델로 전달된 $date를 받아오는 역할. 
+모델의 포켓몬콜 함수를 호출할때 $_POST["date"]를 전달하려고. 
+
+$_POST["name"]으로 데이터 보내서, 모델에서
+select name, date
+from db
+where name = $_POST["name"];
+해준 뒤에 컨트롤러에서 name으로 서버에 저장된 date를 출력하라는 말씀이신건가요??
+
+public function ascending() {
+		$this->load->model("insert_tools");
+		$result = $this->insert_tools->set_ascending();
+		foreach($result->result_array() as $insert) 
+			echo $insert["id"]." ".$insert["pw"]." ".$insert["name"]." ".$insert["gender"]." ".$insert["birthday"]."<br/>";
+	}
+
+$this->pochangmon_tools->pochangmon_call($_POST["name"])
+Severity: 4096 Message: Object of class CI_DB_mysqli_result could not be converted to string

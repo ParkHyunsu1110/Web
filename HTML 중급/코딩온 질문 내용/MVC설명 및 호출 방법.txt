@@ -1,0 +1,54 @@
+코드이그니터로 구축된 홈페이지 접속은 모두 controller를 통해서 이뤄짐
+controller에서 model을 통해 DB에 접속, 혹은 특정 연산 처리 후, view 출력
+
+javascript : function + 함수명 + ()
+
+class : class + 클래스명 
+
+class는 함수들을 모아놓은 것
+한 controller에는 하나의 class 정의
+controller 파일명 = class명 (반드시 일치하면서, 대문자여야 함)
+
+public fuction index()에서 public => 누구나 호출할 수 있음 (private : 이 class안에서만 호출이 가능함, protected => 상속받은 클래스에서 접근 가능)
+
+class안의 함수 = 메소드
+
+컨트롤러의 경우 웹 브라우저에 주소를 쳐서 인수 전달
+뷰의 경우 컨트롤러에서 뷰를 호출할때 함께 전달한 배열변수의 index를 뷰에서 변수로 사용가능
+모델의 경우는 컨트롤러의 폼으로 부터 전송된 데이터를 모델의 메소드에 전달
+
+Ex)
+Class Welcome extends CI_Controller {
+	public function index() {
+		$this->load->view('welcome_message');
+	}
+}
+
+--view
+<!--test_view.php-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			테스트
+		</title>
+	</head>
+	<body>
+		오호라?
+	</body>
+</html>
+
+--controller
+<? defined('BASEPATH') or exit ('no direct script access allowed');
+class Test extends CI_Controller{
+	public function a(){
+		echo "a";
+	}
+	public function b(){
+		echo "b";
+	}
+	public function view(){
+		$this->load->view("test_view"); => view파일 출력하는 코드
+	}
+}
+?>

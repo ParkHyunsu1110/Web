@@ -1,0 +1,97 @@
+html5  - 	html 중에서 5번째, 가장 최신의 버전임,
+	구버전의 Internet Explorer8 같은 경우 현재 만들어지는 페이지의 언어를 이해하고 해석할 수 없음....(어른들이 신조어 못알아듣는 그런거...??)
+	반면, 신형의 Internet Explorer나 Microsoft Edge, Chrome같은 경우 현재의 언어 기반으로 만들어지기 때문에 훨씬 더 좋은 편.
+	특히, Chrome의 경우에는 매번 사용자가 인터넷 창을 켤때마다 새로이 업데이트 함.
+
+validation - 데이터의 적합성을 검사하는 유효성 검사
+	예를 들어 회원가입 페이지를 만들었을때 필수적으로 필요한 이름과 아이디를 만들지 않더라도 회원이 된다면, 정보값이 null인 사람들이 넘칠것...
+	그렇기 때문에 이 값이 정말 유효한지를 검사하는 것.
+
+ 	if ( document.getElementById( "name" ).value == "" ){
+ 		alert( "이름을 입력하세요." );
+ 
+ 		document.getElementById( "name" ).focus(); -> "아이디가 name인 태그에 커서를 위치시키는 코드."
+ 
+ 		return false;
+	}
+ 	=> 위의 경우에서 name의 값이 공란이면 false를 return 함.
+	
+	만일, 이름이 특수문자인 경우는?? => 우리나라에는 이름에 특수문자가 들어가는 사람이 없기 때문에 이를 유효성 검사로 막아야 함. 
+	이를 막을 어떠한 방법이 없기 때문에 개발자들은 데이터를 입력받을때 데이터의 규칙을 미리 설정 후, 모든 유효성 검사를 해야 함. 
+	자체 유효성 검사 => https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation
+
+html5 validation은 <button type="submit">이 클릭될때만 실행됨.
+=>폼 전송과 함께 페이지 자체가 이동되는 구방식의 폼 전송에만 사용 가능함.
+
+var my_form = document.getElementById( "my_form_id" );	//my_form 이라는 변수 선언해서 id가 my_form_id인 태그를 의미하도록 함.
+ 
+if ( !my_form.checkValidity() ){	//my_form.checkValidity() 는 my_form의 유효성 검사를 시행하여 통과하면 true, 실패하면 false return함.
+ my_form.reportValidity();		//위의 라인에 부정인 ! 가 붙어있기에 my_form.checkValidity() 가 false를 return 해야 실행됨.
+// ㄴ> 에러메세지 출력하는 코드 	// => 유효성 검사가 실패해야 실행된다는 말.
+ return false;
+}
+==> 유효성 검사를 통과하지 못하면 에러메세지 출력하고 return false로 폼 전송 취소하는 소스.
+
+-------------------------------
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');?>
+<html>
+	<head>
+		<title>
+			html5 validation
+		</title>
+		<script>
+			function empty(){
+				if(document.getElementById("name").value == "" && document.getElementById("id").value == "" && document.getElementById("pw").value == "" ){
+					<? echo "alert('공란 없이 입력하세요.');"; ?>
+					return false;
+				}	
+				$.post(
+					"http://qkrgustn.com/html5/receive",
+					{},
+					function( data ){
+						<? echo "alert('회원가입 완료');";?>
+						document.getElementById( 'my_form' ).innerHTML = data;
+					}
+				);				
+			}
+		</script>
+	</head>
+	<body>
+		<form action="http://qkrgustn.com/html5/receive" id="my_form" method="post">
+			<h3>회원가입</h3>
+			name : <input type="text" id="name"><br>
+			id : <input type="text" id="id"><br>
+			pw : <input type="text" id="pw"><br>
+			<button type="button" onclick="empty();">회원가입</button>
+		</form>
+	</body>
+</html>
+
+--------------------------------
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');?>
+<html>
+	<head>
+		<title>
+			HTML5 Validation
+		</title>
+	</head>
+	<body>
+		<form action="http://qkrgustn.com/html5_validation/receive" method="post">
+			id : <input type="text"id="id" name="id" required><br/>
+			pw : <input type="text" id="pw" name="pw" required><br/>
+			이름 : <input type="text" id="name" name="name" required><br/>
+			<button type="submit">회원가입</button>
+		</form>
+	</body>
+</html>
+-------
+<? if(! defined('BASEPATH')) exit('No direct script access allowed');
+Class Html5_validation extends CI_Controller{
+	public function form (){
+		$this->load->view("html5_validation_form");
+	}
+	public function receive(){
+		echo $_POST["name"]." ".$_POST["id"]." ".$_POST["pw"];
+	}
+}
+?>
